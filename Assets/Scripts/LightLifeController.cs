@@ -39,7 +39,9 @@ public class LightLifeController : MonoBehaviour {
     }
 
     private void AddLightTime() {
-        remainingSeconds += addtionalSeconds;
+        if(remainingSeconds < startingSeconds) {
+            remainingSeconds += addtionalSeconds;
+        }
     }
 
 }
