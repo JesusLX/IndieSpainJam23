@@ -27,6 +27,7 @@ public class Countdown {
 
     private void Update(float deltaTime) {
         if (isCountingDown) {
+            Debug.Log(remainingTime);
             remainingTime -= deltaTime;
             OnTimeUpdate?.Invoke(remainingTime);
         
