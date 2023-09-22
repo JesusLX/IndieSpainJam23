@@ -15,7 +15,7 @@ namespace isj23.Managers {
 
         public void MainMenu() {
             //UIManager.instance.Hide(UIManager.instance.GameOverPanel);
-            //UIManager.instance.Show(UIManager.instance.MainMenuPanel);
+            UIManager.instance.Show(UIManager.instance.MainMenuPanel);
             //UIManager.instance.Hide(UIManager.instance.BattleScreenPanel);
         }
 
@@ -24,7 +24,7 @@ namespace isj23.Managers {
         /// </summary>
         public void PlayMenu() {
             //UIManager.instance.Hide(UIManager.instance.GameOverPanel);
-            //UIManager.instance.Hide(UIManager.instance.MainMenuPanel);
+            UIManager.instance.Hide(UIManager.instance.MainMenuPanel);
             //UIManager.instance.Show(UIManager.instance.BattleScreenPanel);
         }
 
@@ -35,7 +35,7 @@ namespace isj23.Managers {
         public void GameOverMenu() {
 
             //UIManager.instance.Hide(UIManager.instance.BattleScreenPanel);
-            //UIManager.instance.Hide(UIManager.instance.MainMenuPanel);
+            UIManager.instance.Hide(UIManager.instance.MainMenuPanel);
             //UIManager.instance.Show(UIManager.instance.GameOverPanel);
         }
     } 

@@ -34,7 +34,6 @@ public class LightLifeController : MonoBehaviour {
         float timeElapsed = startingSeconds - remainingSeconds;
         float lightPercentage = 1 - timeElapsed / startingSeconds;
 
-        Debug.Log("Vida: " + lightPercentage);
         light.intensity = startingIntesity * lightPercentage;
     }
 

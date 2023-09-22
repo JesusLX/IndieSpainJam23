@@ -13,13 +13,20 @@ namespace isj23.Inputs {
 
             return movement;
         }
+        public float GetMovementAxis() {
+            float moveHorizontal = Input.GetAxisRaw("Horizontal");
+            return moveHorizontal;
+        }
 
         /// <summary>
         /// Returns if Space is pressed down
         /// </summary>
         /// <returns></returns>
-        public bool JumpInput() {
+        public bool JumpInputDown() {
             return Input.GetKeyDown(KeyCode.Space);
+        }
+        public bool JumpInput() {
+            return Input.GetKey(KeyCode.Space);
         }
         public bool JumpInputUp() {
             return Input.GetKeyUp(KeyCode.Space);
