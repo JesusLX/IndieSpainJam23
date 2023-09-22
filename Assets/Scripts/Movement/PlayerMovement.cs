@@ -2,6 +2,7 @@ using DG.Tweening;
 using isj23.Characters;
 using isj23.ST;
 using System.Threading;
+using UnityEditor;
 using UnityEngine;
 
 
@@ -10,70 +11,126 @@ namespace isj23.Movement {
 
         private IMovementInput input;
         private Rigidbody rb;
-        private IGroundDetection groundDetection;
+        private ITerrainDetector groundDetector;
+        private ITerrainDetector leftWallDetector;
+        private ITerrainDetector rightWallDetector;
 
         public bool isGrounded = true;
+        public bool isLeftTouching = true;
+        public bool isRightTouching = true;
         private bool charginChump = false;
 
         public Animator animator;
         public GameObject groundDetectorGO;
+        public GameObject leftWallDetectorGO;
+        public GameObject rightWallDetectorGO;
 
         private Countdown stopGroundCheckerCD;
         private Coroutine coroutineCD;
         private float maxTime = .5f;
 
+        private float wallJumpForce = 8;
         private float jumpForce = 0;
         private float jumpForceStart = 6;
         private float jumpForceMax = 12;
         private float jumpForceGrouth = 6f;
+        private bool isJumping = false;
 
         public float velocidadRotacion = 100.0f; // Velocidad de rotaci�n, puedes ajustarla en el Inspector.
         private float maxAnguloRotacion = 30.0f;
         public Transform body;
         public Transform pivote;
 
+        public float originalGravity = -9.81f;
+        public float lowGravity = -8.0f;
+        public float currentGravity = -1.0f;
+
+        private Tween DOresetPos;
+
         private void Start() {
             input = GetComponent<IMovementInput>();
             rb = GetComponent<Rigidbody>();
-            groundDetection = groundDetectorGO.GetComponent<IGroundDetection>();
+            groundDetector = groundDetectorGO.GetComponent<ITerrainDetector>();
+            leftWallDetector = leftWallDetectorGO.GetComponent<ITerrainDetector>();
+            rightWallDetector = rightWallDetectorGO.GetComponent<ITerrainDetector>();
         }
         public void StartCountdown() {
             stopGroundCheckerCD = new Countdown(maxTime);
-            stopGroundCheckerCD.OnTimeOut = (groundDetectionTimeOut);
+            stopGroundCheckerCD.OnTimeOut = (groundDetectorTimeOut);
             if (coroutineCD != null) {
                 StopCoroutine(coroutineCD);
             }
             coroutineCD = StartCoroutine(stopGroundCheckerCD.StartCountdown());
         }
-        private void groundDetectionTimeOut() {
+        private void groundDetectorTimeOut() {
             Debug.Log("TIEMPOOOOO");
-            groundDetection.CanCheckGround(true);
+            groundDetector.CanCheckTerrain(true);
         }
         private void Update() {
-            if (!isGrounded && groundDetection.IsGrounded()) {
+      
+            if (!isGrounded && groundDetector.IsTouching()) {
+                isJumping = false;
+                charginChump = false;
                 animator.SetTrigger("onGround");
-            }
-            isGrounded = groundDetection.IsGrounded();
+                ResetRotationZ();
 
-            if (isGrounded && input.JumpInputDown()) {
+            }
+            isGrounded = groundDetector.IsTouching();
+            if (!isGrounded && leftWallDetector.IsTouching() && !isLeftTouching) {
+                isJumping = false;
+                charginChump = false;
+                //animator.SetTrigger("onLeftWall");
+                PivotRotationZ(-25);
+                Debug.Log("onLeftWall");
+            }
+            isLeftTouching = leftWallDetector.IsTouching();
+            if (!isGrounded && rightWallDetector.IsTouching() && !isLeftTouching && !isRightTouching) {
+                PivotRotationZ(25);
+                isJumping = false;
+                charginChump = false;
+                //animator.SetTrigger("onRightWall");
+                Debug.Log("onRightWall");
+            }
+            isRightTouching = rightWallDetector.IsTouching();
+
+            ChangingGravity();
+            
+            if ((isGrounded || (!isGrounded && (isLeftTouching || isRightTouching))) && input.JumpInputDown()) {
                 animator.SetTrigger("onChargeJump");
                 charginChump = true;
                 ResetJumpForce();
-                Debug.Log("Cargandoooo");
             }
             if(charginChump && input.JumpInput()) {
                 ChagerJumpForce();
             }
-            if (charginChump && isGrounded && input.JumpInputUp()) {
+            
+            if (charginChump && (isGrounded || (!isGrounded && (isLeftTouching || isRightTouching))) && input.JumpInputUp()) {
                 animator.SetTrigger("onJump");
                 charginChump = false;
 
                 Jump();
-                groundDetection.CanCheckGround(false);
-                groundDetection.SetGrounded(false);
+                groundDetector.CanCheckTerrain(false);
+                groundDetector.SetTouching(false);
                 StartCountdown();
-                ResetRotationZ();
             }
+
+            if (!isGrounded && !isLeftTouching && !isRightTouching && !isJumping) {
+                animator.SetTrigger("onFall");
+                charginChump = false;
+            }
+
+        }
+
+        private void ChangingGravity() {
+            if (!isGrounded && (isLeftTouching || isRightTouching)) {
+                currentGravity = lowGravity;
+                if (rb.velocity.y > 0 && !isJumping) {
+                    rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                }
+            } else {
+                currentGravity = originalGravity;
+            }
+            Physics.gravity = new Vector3(0, currentGravity, 0);
         }
 
         private void FixedUpdate() {
@@ -96,7 +153,9 @@ namespace isj23.Movement {
             Vector3 direccionLanzamiento = new Vector3(direccion2D.y, direccion2D.x, 0.0f);
             // Aplicar una fuerza en la direcci�n calculada al Objeto a Lanzar
             rb.AddForce(direccionLanzamiento * jumpForce, ForceMode.Impulse);
-
+            ResetJumpForce();
+            ResetRotationZ();
+            isJumping = true;
         }
 
         #region Movement
@@ -126,7 +185,17 @@ namespace isj23.Movement {
         }
         void ResetRotationZ() {
             // Utiliza DoTween para establecer la rotaci�n Z a 0 grados en 1 segundo.
-            body.DORotate(new Vector3(0f, 0f, 0f), 1.0f).SetEase(Ease.OutQuad);
+
+           DOresetPos = body.DORotate(new Vector3(0f, 0f, 0f), 1.0f).SetEase(Ease.OutQuad);
+
+        }
+        void PivotRotationZ(float degrees) {
+            // Utiliza DoTween para establecer la rotaci�n Z a 0 grados en 1 segundo.
+            if(DOresetPos != null && DOresetPos.IsActive()) {
+                DOresetPos.Kill();
+            }
+            body.DORotate(new Vector3(0f, 0f, degrees), 0.5f).SetEase(Ease.OutQuad);
+
         }
         public override void TryMove() {
             if (canMove && isGrounded && !charginChump) {
@@ -139,8 +208,8 @@ namespace isj23.Movement {
                 Vector3 movement = input.GetMovementInput();
                 movement *= stats.MoveSpeed/5;
 
-                rb.velocity += movement*Time.fixedDeltaTime;
-            } else if(canMove  && charginChump) {
+                rb.velocity += movement * Time.fixedDeltaTime;
+            } else if(canMove  && charginChump && isGrounded) {
                 rb.velocity = Vector3.zero;
                 Rotate();
             }
