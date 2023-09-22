@@ -31,13 +31,13 @@ namespace isj23.Movement {
 
         private float wallJumpForce = 8;
         private float jumpForce = 0;
-        private float jumpForceStart = 6;
-        private float jumpForceMax = 12;
-        private float jumpForceGrouth = 6f;
+        public float jumpForceStart = 6;
+        public float jumpForceMax = 12;
+        public float jumpForceGrouth = 6f;
         private bool isJumping = false;
 
         public float velocidadRotacion = 100.0f; // Velocidad de rotaci�n, puedes ajustarla en el Inspector.
-        private float maxAnguloRotacion = 30.0f;
+        private float maxAnguloRotacion = 35.0f;
         public Transform body;
         public Transform pivote;
 
@@ -118,6 +118,7 @@ namespace isj23.Movement {
                 animator.SetTrigger("onFall");
                 charginChump = false;
             }
+            
 
         }
 
@@ -128,7 +129,12 @@ namespace isj23.Movement {
                     rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
                 }
             } else {
-                currentGravity = originalGravity;
+                if (rb.velocity.y > 0 && isJumping) {
+                    currentGravity = originalGravity*1.5f;
+
+                } else {
+                    currentGravity = originalGravity;
+                }
             }
             Physics.gravity = new Vector3(0, currentGravity, 0);
         }

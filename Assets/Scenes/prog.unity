@@ -2339,11 +2339,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4679081879860023634, guid: 697d0d27216d6ed41bf7ea72801f60d2, type: 3}
       propertyPath: m_Mass
-      value: 3
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679081879860023634, guid: 697d0d27216d6ed41bf7ea72801f60d2, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4679081879860023634, guid: 697d0d27216d6ed41bf7ea72801f60d2, type: 3}
       propertyPath: m_AngularDrag
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679081879860023635, guid: 697d0d27216d6ed41bf7ea72801f60d2, type: 3}
+      propertyPath: jumpForceMax
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679081879860023635, guid: 697d0d27216d6ed41bf7ea72801f60d2, type: 3}
+      propertyPath: jumpForceStart
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4679081879860023643, guid: 697d0d27216d6ed41bf7ea72801f60d2, type: 3}
       propertyPath: m_Name
