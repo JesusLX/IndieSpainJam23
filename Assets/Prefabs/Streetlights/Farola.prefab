@@ -93,7 +93,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 7042907788488555495}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5000001
   m_Height: 2
   m_Direction: 1
@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9981077381aa064c8981cd1708f0fb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turnOnParticles: fire_boom
 --- !u!1 &7042907788546619035
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,7 +158,7 @@ GameObject:
   - component: {fileID: 7042907788546619030}
   - component: {fileID: 7042907788546619033}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: Encendedor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -335,7 +336,7 @@ SphereCollider:
   m_GameObject: {fileID: 7042907789410154462}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}

@@ -19,7 +19,12 @@ public class LighterDetector : MonoBehaviour, ITerrainDetector {
     /// <returns></returns>
     public bool IsTouching() {
         if (canCheckTerrain) {
-            SetTouching(Physics.CheckSphere(terrainChecker.position, terrainCheckRadius, terrainLayer));
+            Collider[] objetosCercanos = Physics.OverlapSphere(terrainChecker.position, terrainCheckRadius,terrainLayer);
+
+            foreach (Collider objeto in objetosCercanos) {
+                Debug.Log("Objeto cercano: " + objeto.name);
+                objeto.GetComponent<ILighter>().TurnOn();
+            }
         }
         return isTerrain;
     }
@@ -37,7 +42,7 @@ public class LighterDetector : MonoBehaviour, ITerrainDetector {
     }
 
     private void Update() {
-        if (canCheckTerrain) {
+        if (IsTouching()) {
             IsTouching();
         }
     }

@@ -14,6 +14,7 @@ public class FlickeringLight : MonoBehaviour, ILight {
     private Light light;
     private float range;
 
+    public Transform Transform => this.transform;
 
     private void Start() {
         light = GetComponent<Light>();
@@ -21,14 +22,14 @@ public class FlickeringLight : MonoBehaviour, ILight {
         startingIntesity = light.intensity;
     }
     public void Turn(bool on_off) {
-        Debug.Log("Encendido"+on_off);
 
-        gameObject.SetActive(on_off);
-        if(on_off) {
+        if(light.enabled = (on_off)) {
             AnimatedTurnOn();
         }
     }
-
+    public bool IsOn() {
+        return light.enabled;
+    }
     private void Update() {
         time += Time.deltaTime * (1 - Random.Range(-speedRandomness, speedRandomness)) * Mathf.PI;
         light.intensity = startingIntesity + Mathf.Sin(time * flickersPerSecond) * flickerIntesity;
@@ -36,7 +37,6 @@ public class FlickeringLight : MonoBehaviour, ILight {
 
     private void AnimatedTurnOn() {
         light.range = 0;
-        PSManager.instance.Play("fire_boom", this.transform, Vector3.zero, Quaternion.identity);
         // Crea un Tween que va desde 0 hasta el rangoMaximo
         DOTween.To(() => light.range, x => light.range = x, range, .5f)
             .SetEase(Ease.OutQuad) // Puedes ajustar la curva de easing según tus necesidades
