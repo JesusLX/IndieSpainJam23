@@ -38,6 +38,7 @@ namespace isj23.Characters {
         }
         private void Start() {
             lighterDetector.OnLighterTurnedOn.AddListener(lightLifeController.AddLightTime);
+            lightLifeController.onLightOff.AddListener(() => Die(this));
         }
 
         public void LevelUp(Stats.LevelST level) {

@@ -3,6 +3,7 @@ using isj23.Managers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LightLifeController : MonoBehaviour, ITimeAffected {
 
@@ -12,7 +13,7 @@ public class LightLifeController : MonoBehaviour, ITimeAffected {
     public float remainingSeconds;
     public float addtionalSeconds = 2f;
     public bool timeRunning = false;
-
+    public UnityEvent onLightOff = new UnityEvent();
 
     private void Start() {
         light = GetComponent<Light>();
@@ -46,6 +47,10 @@ public class LightLifeController : MonoBehaviour, ITimeAffected {
             float lightPercentage = 1 - timeElapsed / startingSeconds;
 
             light.intensity = startingIntesity * lightPercentage;
+
+            if(remainingSeconds <= 0) {
+                onLightOff?.Invoke();
+            }
         }
     }
 
