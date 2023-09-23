@@ -16,7 +16,7 @@ public class FlickeringLight : MonoBehaviour, ILight {
 
     public Transform Transform => this.transform;
 
-    private void Start() {
+    private void Awake() {
         light = GetComponent<Light>();
         range = light.range;
         startingIntesity = light.intensity;

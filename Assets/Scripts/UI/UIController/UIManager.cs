@@ -5,6 +5,7 @@ namespace isj23.Managers {
         public MainMenu MainMenuPanel;
         public GameOverScreen GameOverPanel;
         public BattleScreen BattleScreenPanel;
+        public WinScreen WinScreenPanel;
 
         public void Show(IUiScreen screen) {
             screen.Show();
@@ -16,6 +17,7 @@ namespace isj23.Managers {
         public void MainMenu() {
             //UIManager.instance.Hide(UIManager.instance.GameOverPanel);
             UIManager.instance.Show(UIManager.instance.MainMenuPanel);
+            UIManager.instance.Hide(UIManager.instance.WinScreenPanel);
             //UIManager.instance.Hide(UIManager.instance.BattleScreenPanel);
         }
 
@@ -25,6 +27,7 @@ namespace isj23.Managers {
         public void PlayMenu() {
             //UIManager.instance.Hide(UIManager.instance.GameOverPanel);
             UIManager.instance.Hide(UIManager.instance.MainMenuPanel);
+            UIManager.instance.Hide(UIManager.instance.WinScreenPanel);
             //UIManager.instance.Show(UIManager.instance.BattleScreenPanel);
         }
 
@@ -36,6 +39,18 @@ namespace isj23.Managers {
 
             //UIManager.instance.Hide(UIManager.instance.BattleScreenPanel);
             UIManager.instance.Hide(UIManager.instance.MainMenuPanel);
+            UIManager.instance.Hide(UIManager.instance.WinScreenPanel);
+            //UIManager.instance.Show(UIManager.instance.GameOverPanel);
+        }
+
+        /// <summary>
+        /// Prepare the Canvas and open the Game Over screen
+        /// </summary>
+        public void WinMenu() {
+
+            //UIManager.instance.Hide(UIManager.instance.BattleScreenPanel);
+            UIManager.instance.Hide(UIManager.instance.MainMenuPanel);
+            UIManager.instance.Show(UIManager.instance.WinScreenPanel);
             //UIManager.instance.Show(UIManager.instance.GameOverPanel);
         }
     } 

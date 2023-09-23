@@ -10,6 +10,7 @@ namespace isj23.Managers {
 
         public UnityEvent OnGameStart = new();
         public UnityEvent OnGameOver = new();
+        public UnityEvent OnWinOver = new();
         private void Start() {
             MainMenu();
         }
@@ -46,8 +47,8 @@ namespace isj23.Managers {
         /// </summary>
         public void WinGame() {
             TimeManager.instance.StopPlayTime();
-            OnGameOver?.Invoke();
-            UIManager.instance.GameOverMenu();
+            OnWinOver?.Invoke();
+            UIManager.instance.WinMenu();
         }
 
 
