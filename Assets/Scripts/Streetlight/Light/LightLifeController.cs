@@ -1,5 +1,7 @@
 using isj23;
 using isj23.Managers;
+using isj23.ParticlesPool;
+using isj23.ST;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +16,7 @@ public class LightLifeController : MonoBehaviour, ITimeAffected {
     public float addtionalSeconds = 2f;
     public bool timeRunning = false;
     public UnityEvent onLightOff = new UnityEvent();
+    public ParticleSystem firePS;
 
     private void Start() {
         light = GetComponent<Light>();
@@ -27,8 +30,9 @@ public class LightLifeController : MonoBehaviour, ITimeAffected {
         DetachTimeEvents();
     }
 
-    public void Init() {
+    public void Init(Stats.HealthST health) {
         Debug.Log("inicio");
+        startingSeconds = health.MaxHealth;
         remainingSeconds = startingSeconds;
     }
 
@@ -48,8 +52,10 @@ public class LightLifeController : MonoBehaviour, ITimeAffected {
 
             light.intensity = startingIntesity * lightPercentage;
 
-            if(remainingSeconds <= 0) {
+            if (remainingSeconds <= 0) {
                 onLightOff?.Invoke();
+                firePS.Stop();
+                PSManager.instance.Play("puf", null, light.transform.position, Quaternion.identity);
             }
         }
     }
@@ -58,11 +64,19 @@ public class LightLifeController : MonoBehaviour, ITimeAffected {
         if (remainingSeconds < startingSeconds) {
             remainingSeconds += addtionalSeconds;
         }
+        if (remainingSeconds > startingSeconds) {
+            remainingSeconds = startingSeconds;
+        }
+    }
+    public void SubstractLightTime(float time) {
+            remainingSeconds -= time;
+        if(remainingSeconds <= 0) {
+            remainingSeconds = 0.1f;
+        }
     }
 
     #region ITimeAffected
     public void OnPlayTimeStarts() {
-        Init();
         timeRunning = true;
     }
 

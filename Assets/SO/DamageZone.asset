@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e0131da309bd764d9bb65724bcc28eb, type: 3}
-  m_Name: PlayerStats
+  m_Name: DamageZone
   m_EditorClassIdentifier: 
   Health:
     maxHealth: 30
@@ -19,7 +19,7 @@ MonoBehaviour:
     moveSpeed: 6
     jumpForce: 10
   Attack:
-    damage: 0
+    damage: 100
     rafaga: 0
     rafagaCountdown: 0
     shootCountdown: 0

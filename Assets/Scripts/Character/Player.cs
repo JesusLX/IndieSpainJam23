@@ -53,6 +53,7 @@ namespace isj23.Characters {
             //foreach (var weapon in weapons) {
             //    AddWeapon(weapon);
             //}
+            lightLifeController.Init(Stats.Health);
             GetComponent<IMovement>().Init(this);
         }
 
@@ -63,14 +64,17 @@ namespace isj23.Characters {
 
         public void Hit(float damage, ICharacter assasing) {
             Stats.Health.CurrentHealth -= damage;
-            if (Stats.Health.CurrentHealth <= 0) {
-                Die(assasing);
-            }
+            lightLifeController.SubstractLightTime(damage);
+            Debug.Log(damage);
+            //if (Stats.Health.CurrentHealth <= 0) {
+            //    Die(assasing);
+            //}
             OnStatsChanged?.Invoke(Stats);
         }
 
         public void Die(ICharacter assasing) {
             GameManager.instance.GameOver();
+            GetComponentInChildren<Animator>().SetTrigger("onDie");
             OnDie?.Invoke();
         }
 

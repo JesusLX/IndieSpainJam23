@@ -5544,7 +5544,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.48
+  m_Radius: 0.35
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0}
@@ -5617,6 +5617,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5144739498956080042}
     m_Modifications:
+    - target: {fileID: 505443499704349846, guid: fbc0a1461c52e9a4fb8a7e5828a5bb1c, type: 3}
+      propertyPath: firePS
+      value: 
+      objectReference: {fileID: 4679081879801379796}
     - target: {fileID: 505443499704349846, guid: fbc0a1461c52e9a4fb8a7e5828a5bb1c, type: 3}
       propertyPath: addtionalSeconds
       value: 10
