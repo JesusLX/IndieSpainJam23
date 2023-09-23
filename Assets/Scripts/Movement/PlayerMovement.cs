@@ -67,59 +67,59 @@ namespace isj23.Movement {
             groundDetector.CanCheckTerrain(true);
         }
         private void Update() {
-      
-            if (!isGrounded && groundDetector.IsTouching()) {
-                isJumping = false;
-                charginChump = false;
-                animator.SetTrigger("onGround");
-                ResetRotationZ();
+            if (canMove) {
 
-            }
-            isGrounded = groundDetector.IsTouching();
-            if (!isGrounded && leftWallDetector.IsTouching() && !isLeftTouching) {
-                isJumping = false;
-                charginChump = false;
-                //animator.SetTrigger("onLeftWall");
-                PivotRotationZ(-25);
-                Debug.Log("onLeftWall");
-            }
-            isLeftTouching = leftWallDetector.IsTouching();
-            if (!isGrounded && rightWallDetector.IsTouching() && !isLeftTouching && !isRightTouching) {
-                PivotRotationZ(25);
-                isJumping = false;
-                charginChump = false;
-                //animator.SetTrigger("onRightWall");
-                Debug.Log("onRightWall");
-            }
-            isRightTouching = rightWallDetector.IsTouching();
+                if (!isGrounded && groundDetector.IsTouching()) {
+                    isJumping = false;
+                    charginChump = false;
+                    animator.SetTrigger("onGround");
+                    ResetRotationZ();
 
-            ChangingGravity();
-            
-            if ((isGrounded || (!isGrounded && (isLeftTouching || isRightTouching))) && input.JumpInputDown()) {
-                animator.SetTrigger("onChargeJump");
-                charginChump = true;
-                ResetJumpForce();
-            }
-            if(charginChump && input.JumpInput()) {
-                ChagerJumpForce();
-            }
-            
-            if (charginChump && (isGrounded || (!isGrounded && (isLeftTouching || isRightTouching))) && input.JumpInputUp()) {
-                animator.SetTrigger("onJump");
-                charginChump = false;
+                }
+                isGrounded = groundDetector.IsTouching();
+                if (!isGrounded && leftWallDetector.IsTouching() && !isLeftTouching) {
+                    isJumping = false;
+                    charginChump = false;
+                    //animator.SetTrigger("onLeftWall");
+                    PivotRotationZ(-25);
+                    Debug.Log("onLeftWall");
+                }
+                isLeftTouching = leftWallDetector.IsTouching();
+                if (!isGrounded && rightWallDetector.IsTouching() && !isLeftTouching && !isRightTouching) {
+                    PivotRotationZ(25);
+                    isJumping = false;
+                    charginChump = false;
+                    //animator.SetTrigger("onRightWall");
+                    Debug.Log("onRightWall");
+                }
+                isRightTouching = rightWallDetector.IsTouching();
 
-                Jump();
-                groundDetector.CanCheckTerrain(false);
-                groundDetector.SetTouching(false);
-                StartCountdown();
-            }
+                ChangingGravity();
 
-            if (!isGrounded && !isLeftTouching && !isRightTouching && !isJumping) {
-                animator.SetTrigger("onFall");
-                charginChump = false;
-            }
-            
+                if ((isGrounded || (!isGrounded && (isLeftTouching || isRightTouching))) && input.JumpInputDown()) {
+                    animator.SetTrigger("onChargeJump");
+                    charginChump = true;
+                    ResetJumpForce();
+                }
+                if (charginChump && input.JumpInput()) {
+                    ChagerJumpForce();
+                }
 
+                if (charginChump && (isGrounded || (!isGrounded && (isLeftTouching || isRightTouching))) && input.JumpInputUp()) {
+                    animator.SetTrigger("onJump");
+                    charginChump = false;
+
+                    Jump();
+                    groundDetector.CanCheckTerrain(false);
+                    groundDetector.SetTouching(false);
+                    StartCountdown();
+                }
+
+                if (!isGrounded && !isLeftTouching && !isRightTouching && !isJumping) {
+                    animator.SetTrigger("onFall");
+                    charginChump = false;
+                }
+            }
         }
 
         private void ChangingGravity() {
@@ -130,7 +130,7 @@ namespace isj23.Movement {
                 }
             } else {
                 if (rb.velocity.y > 0 && isJumping) {
-                    currentGravity = originalGravity*1.5f;
+                    currentGravity = originalGravity * 1.5f;
 
                 } else {
                     currentGravity = originalGravity;
@@ -144,7 +144,7 @@ namespace isj23.Movement {
         }
         private void ChagerJumpForce() {
             if (jumpForce < jumpForceMax) {
-                jumpForce += jumpForceGrouth*Time.deltaTime;
+                jumpForce += jumpForceGrouth * Time.deltaTime;
             }
         }
         private void ResetJumpForce() {
@@ -192,32 +192,33 @@ namespace isj23.Movement {
         void ResetRotationZ() {
             // Utiliza DoTween para establecer la rotaci�n Z a 0 grados en 1 segundo.
 
-           DOresetPos = body.DORotate(new Vector3(0f, 0f, 0f), 1.0f).SetEase(Ease.OutQuad);
+            DOresetPos = body.DORotate(new Vector3(0f, 0f, 0f), 1.0f).SetEase(Ease.OutQuad);
 
         }
         void PivotRotationZ(float degrees) {
             // Utiliza DoTween para establecer la rotaci�n Z a 0 grados en 1 segundo.
-            if(DOresetPos != null && DOresetPos.IsActive()) {
+            if (DOresetPos != null && DOresetPos.IsActive()) {
                 DOresetPos.Kill();
             }
             body.DORotate(new Vector3(0f, 0f, degrees), 0.5f).SetEase(Ease.OutQuad);
 
         }
         public override void TryMove() {
-            if (canMove && isGrounded && !charginChump) {
-                Vector3 movement = input.GetMovementInput();
-                movement *= stats.MoveSpeed;
+            if (canMove) {
+                if (isGrounded && !charginChump) {
+                    Vector3 movement = input.GetMovementInput();
+                    movement *= stats.MoveSpeed;
 
-                rb.velocity = movement;
-            }else if (canMove && !isGrounded && !charginChump)
-            {
-                Vector3 movement = input.GetMovementInput();
-                movement *= stats.MoveSpeed/5;
+                    rb.velocity = movement;
+                } else if (!isGrounded && !charginChump) {
+                    Vector3 movement = input.GetMovementInput();
+                    movement *= stats.MoveSpeed / 5;
 
-                rb.velocity += movement * Time.fixedDeltaTime;
-            } else if(canMove  && charginChump && isGrounded) {
-                rb.velocity = Vector3.zero;
-                Rotate();
+                    rb.velocity += movement * Time.fixedDeltaTime;
+                } else if (charginChump && isGrounded) {
+                    rb.velocity = Vector3.zero;
+                    Rotate();
+                }
             }
         }
         #endregion 

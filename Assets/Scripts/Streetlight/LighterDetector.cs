@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LighterDetector : MonoBehaviour, ITerrainDetector {
     public Transform terrainChecker;
@@ -8,7 +9,9 @@ public class LighterDetector : MonoBehaviour, ITerrainDetector {
     public float terrainCheckRadius = 0.2f;
     public bool canCheckTerrain = true;
     public bool isTerrain = true;
+    private UnityEvent onLighterTurnedOn = new UnityEvent();
 
+    public UnityEvent OnLighterTurnedOn { get { return onLighterTurnedOn; } }
     public void CanCheckTerrain(bool can) {
         canCheckTerrain = can;
     }
@@ -19,11 +22,13 @@ public class LighterDetector : MonoBehaviour, ITerrainDetector {
     /// <returns></returns>
     public bool IsTouching() {
         if (canCheckTerrain) {
-            Collider[] objetosCercanos = Physics.OverlapSphere(terrainChecker.position, terrainCheckRadius,terrainLayer);
+            Collider[] objetosCercanos = Physics.OverlapSphere(terrainChecker.position, terrainCheckRadius, terrainLayer);
 
             foreach (Collider objeto in objetosCercanos) {
                 Debug.Log("Objeto cercano: " + objeto.name);
-                objeto.GetComponent<ILighter>().TurnOn();
+                if (objeto.GetComponent<ILighter>().TurnOn()) {
+                    OnLighterTurnedOn?.Invoke();
+                }
             }
         }
         return isTerrain;

@@ -234,6 +234,71 @@ MonoBehaviour:
   groundCheckRadius: 0.2
   canCheckGround: 1
   isGround: 1
+--- !u!1 &1908496551
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1908496552}
+  - component: {fileID: 1908496553}
+  - component: {fileID: 1908496554}
+  m_Layer: 0
+  m_Name: LightDetector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1908496552
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908496551}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.92, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4679081879860023633}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1908496553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908496551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6928b26b8ac734040a5c0280d366aeec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrainChecker: {fileID: 1908496552}
+  terrainLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  terrainCheckRadius: 0.71
+  canCheckTerrain: 1
+  isTerrain: 0
+--- !u!65 &1908496554
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908496551}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4679081878743967251
 GameObject:
   m_ObjectHideFlags: 0
@@ -5331,6 +5396,7 @@ Transform:
   - {fileID: 4679081878743967255}
   - {fileID: 1379724041}
   - {fileID: 1013216026}
+  - {fileID: 1908496552}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5406,6 +5472,8 @@ MonoBehaviour:
   OnDie:
     m_PersistentCalls:
       m_Calls: []
+  lighterDetector: {fileID: 1908496553}
+  lightLifeController: {fileID: 5182730588595732203}
 --- !u!114 &4679081879860023635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5429,6 +5497,9 @@ MonoBehaviour:
   groundDetectorGO: {fileID: 4679081878743967251}
   leftWallDetectorGO: {fileID: 1379724040}
   rightWallDetectorGO: {fileID: 1013216025}
+  jumpForceStart: 6
+  jumpForceMax: 13
+  jumpForceGrouth: 8
   velocidadRotacion: 60
   body: {fileID: 4679081879385498346}
   pivote: {fileID: 4679081878743967255}
@@ -5445,7 +5516,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -5473,7 +5544,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.24
+  m_Radius: 0.48
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0}
@@ -5546,6 +5617,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5144739498956080042}
     m_Modifications:
+    - target: {fileID: 505443499704349846, guid: fbc0a1461c52e9a4fb8a7e5828a5bb1c, type: 3}
+      propertyPath: addtionalSeconds
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5529347931755286224, guid: fbc0a1461c52e9a4fb8a7e5828a5bb1c, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -5594,5 +5669,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: LuzSencilla
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5529347931755286226, guid: fbc0a1461c52e9a4fb8a7e5828a5bb1c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fbc0a1461c52e9a4fb8a7e5828a5bb1c, type: 3}
+--- !u!114 &5182730588595732203 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 505443499704349846, guid: fbc0a1461c52e9a4fb8a7e5828a5bb1c, type: 3}
+  m_PrefabInstance: {fileID: 4679081878821849725}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2d603b792ea6004faaed4861731214a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

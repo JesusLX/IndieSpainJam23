@@ -18,12 +18,14 @@ public class Streetlight : MonoBehaviour, IStreetlight {
         lighter = GetComponentInChildren<ILighter>(true);
     }
     [ContextMenu("TurnOn")]
-    public void TurnOn() {
+    public bool TurnOn() {
         if (!_light.IsOn()) {
             PSManager.instance.Play(turnOnParticles, _light.Transform, Vector3.zero, Quaternion.identity);
             _light.Turn(true);
             OnTurnOn?.Invoke(this);
+            return true;
         }
+        return false;
     }
     [ContextMenu("TurnOff")]
     public void TurnOff() {

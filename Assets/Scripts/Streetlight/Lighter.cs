@@ -7,8 +7,8 @@ public class Lighter : MonoBehaviour, ILighter {
     private void Start() {
         myLight = GetComponentInParent<IStreetlight>();
     }
-    public void TurnOn() {
-        myLight.TurnOn();
+    public bool TurnOn() {
+        return myLight.TurnOn();
     }
     public void TurnOff() {
         myLight.TurnOff();

@@ -25,6 +25,9 @@ namespace isj23.Characters {
         public UnityEvent OnEnemyKilled = new();
         public UnityEvent OnDie = new();
 
+        public LighterDetector lighterDetector;
+        public LightLifeController lightLifeController;
+
         private void OnEnable() {
             onStatsChanged = new UnityEvent<Stats>();
             //FindObjectOfType<LevelManager>().OnLevelUp.AddListener(LevelUp);
@@ -32,6 +35,9 @@ namespace isj23.Characters {
         }
         private void OnDisable() {
             DetachTimeEvents();
+        }
+        private void Start() {
+            lighterDetector.OnLighterTurnedOn.AddListener(lightLifeController.AddLightTime);
         }
 
         public void LevelUp(Stats.LevelST level) {
