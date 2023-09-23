@@ -15,7 +15,7 @@ namespace isj23.Managers {
         }
 
         public void MainMenu() {
-            //UIManager.instance.Hide(UIManager.instance.GameOverPanel);
+            UIManager.instance.Hide(UIManager.instance.GameOverPanel);
             UIManager.instance.Show(UIManager.instance.MainMenuPanel);
             UIManager.instance.Hide(UIManager.instance.WinScreenPanel);
             //UIManager.instance.Hide(UIManager.instance.BattleScreenPanel);
@@ -25,7 +25,7 @@ namespace isj23.Managers {
         /// Prepare the Canvas for the game
         /// </summary>
         public void PlayMenu() {
-            //UIManager.instance.Hide(UIManager.instance.GameOverPanel);
+            UIManager.instance.Hide(UIManager.instance.GameOverPanel);
             UIManager.instance.Hide(UIManager.instance.MainMenuPanel);
             UIManager.instance.Hide(UIManager.instance.WinScreenPanel);
             //UIManager.instance.Show(UIManager.instance.BattleScreenPanel);
@@ -40,7 +40,7 @@ namespace isj23.Managers {
             //UIManager.instance.Hide(UIManager.instance.BattleScreenPanel);
             UIManager.instance.Hide(UIManager.instance.MainMenuPanel);
             UIManager.instance.Hide(UIManager.instance.WinScreenPanel);
-            //UIManager.instance.Show(UIManager.instance.GameOverPanel);
+            UIManager.instance.Show(UIManager.instance.GameOverPanel);
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace isj23.Managers {
             //UIManager.instance.Hide(UIManager.instance.BattleScreenPanel);
             UIManager.instance.Hide(UIManager.instance.MainMenuPanel);
             UIManager.instance.Show(UIManager.instance.WinScreenPanel);
-            //UIManager.instance.Show(UIManager.instance.GameOverPanel);
+            UIManager.instance.Show(UIManager.instance.GameOverPanel);
         }
     } 
 }

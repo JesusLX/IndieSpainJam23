@@ -44,6 +44,7 @@ public class FlickeringLight : MonoBehaviour, ILight {
                 // Opcional: Puedes realizar acciones adicionales durante el Tween
                 float valorActual = light.range;
             });
+        AudioManager.Instance.Play("light_on", true, true);
     }
 
 }

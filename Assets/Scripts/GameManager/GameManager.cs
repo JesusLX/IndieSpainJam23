@@ -19,17 +19,19 @@ namespace isj23.Managers {
         /// Prepare the Canvas for the MainMenu and stops the game
         /// </summary>
         public void MainMenu() {
-            UIManager.instance.MainMenu();
             TimeManager.instance.StopPlayTime();
+            UIManager.instance.MainMenu();
         }
 
         /// <summary>
         /// Prepare the Canvas and start the game
         /// </summary>
         [ContextMenu("Play")]
-        public void Play() {
+        public void Play(bool startTime = false) {
             UIManager.instance.PlayMenu();
-            OnGameStart?.Invoke();
+            if (startTime) {
+                OnGameStart?.Invoke();
+            }
             //UIManager.instance.BattleScreenPanel.Init();
         }
 

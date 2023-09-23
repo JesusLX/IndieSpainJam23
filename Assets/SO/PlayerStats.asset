@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
   Health:
-    maxHealth: 30
+    maxHealth: 100
     currentHealth: 10
   Movement:
     moveSpeed: 6

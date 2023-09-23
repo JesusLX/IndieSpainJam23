@@ -1,5 +1,6 @@
 using DG.Tweening;
 using isj23.Characters;
+using isj23.ParticlesPool;
 using isj23.ST;
 using System.Threading;
 using UnityEditor;
@@ -31,10 +32,11 @@ namespace isj23.Movement {
 
         private float wallJumpForce = 8;
         private float jumpForce = 0;
-        public float jumpForceStart = 6;
+        public float jumpForceStart = 8;
         public float jumpForceMax = 12;
         public float jumpForceGrouth = 6f;
         private bool isJumping = false;
+        private bool positioning = false;
 
         public float velocidadRotacion = 100.0f; // Velocidad de rotaci�n, puedes ajustarla en el Inspector.
         private float maxAnguloRotacion = 35.0f;
@@ -63,7 +65,6 @@ namespace isj23.Movement {
             coroutineCD = StartCoroutine(stopGroundCheckerCD.StartCountdown());
         }
         private void groundDetectorTimeOut() {
-            Debug.Log("TIEMPOOOOO");
             groundDetector.CanCheckTerrain(true);
         }
         private void Update() {
@@ -72,6 +73,7 @@ namespace isj23.Movement {
                 if (!isGrounded && groundDetector.IsTouching()) {
                     isJumping = false;
                     charginChump = false;
+                    animator.ResetTrigger("onFall");
                     animator.SetTrigger("onGround");
                     ResetRotationZ();
 
@@ -95,7 +97,11 @@ namespace isj23.Movement {
                 isRightTouching = rightWallDetector.IsTouching();
 
                 ChangingGravity();
-
+                if (!charginChump && (isGrounded || (!isGrounded && (isLeftTouching || isRightTouching))) && input.JumpInput()) {
+                    animator.SetTrigger("onChargeJump");
+                    charginChump = true;
+                    ResetJumpForce();
+                }
                 if ((isGrounded || (!isGrounded && (isLeftTouching || isRightTouching))) && input.JumpInputDown()) {
                     animator.SetTrigger("onChargeJump");
                     charginChump = true;
@@ -106,19 +112,14 @@ namespace isj23.Movement {
                 }
 
                 if (charginChump && (isGrounded || (!isGrounded && (isLeftTouching || isRightTouching))) && input.JumpInputUp()) {
-                    animator.SetTrigger("onJump");
-                    charginChump = false;
-
-                    Jump();
-                    groundDetector.CanCheckTerrain(false);
-                    groundDetector.SetTouching(false);
-                    StartCountdown();
+                    TryJump();
                 }
-
                 if (!isGrounded && !isLeftTouching && !isRightTouching && !isJumping) {
                     animator.SetTrigger("onFall");
                     charginChump = false;
                 }
+
+
             }
         }
 
@@ -150,6 +151,17 @@ namespace isj23.Movement {
         private void ResetJumpForce() {
             jumpForce = jumpForceStart;
         }
+        private void TryJump() {
+            if (!positioning) {
+                animator.SetTrigger("onJump");
+                charginChump = false;
+
+                Jump();
+                groundDetector.CanCheckTerrain(false);
+                groundDetector.SetTouching(false);
+                StartCountdown();
+            }
+        }
         private void Jump() {
             float rotationZ = -body.eulerAngles.z;
             // Convertir la rotaci�n en Z en un vector de direcci�n 2D
@@ -159,9 +171,11 @@ namespace isj23.Movement {
             Vector3 direccionLanzamiento = new Vector3(direccion2D.y, direccion2D.x, 0.0f);
             // Aplicar una fuerza en la direcci�n calculada al Objeto a Lanzar
             rb.AddForce(direccionLanzamiento * jumpForce, ForceMode.Impulse);
+            PSManager.instance.Play("jump",null,transform.position,body.rotation);
             ResetJumpForce();
-            ResetRotationZ();
+            ResetRotationZ(true);
             isJumping = true;
+            AudioManager.Instance.Play("jump", true, true);
         }
 
         #region Movement
@@ -189,10 +203,16 @@ namespace isj23.Movement {
             // Aplicar la rotaci�n limitada al objeto
             body.rotation = Quaternion.Euler(0, 0, nuevaRotacion);
         }
-        void ResetRotationZ() {
-            // Utiliza DoTween para establecer la rotaci�n Z a 0 grados en 1 segundo.
+        void ResetRotationZ(bool canAnimate = true) {
+            float doOrNot = Random.Range(0f, 1f);
+            Debug.Log(doOrNot);
+            if (canAnimate && doOrNot > .9f && !isLeftTouching) {
+                var move = 360f;
+                DOresetPos = body.DORotate(new Vector3(0f, move, 0f), .5f, RotateMode.FastBeyond360).SetEase(Ease.OutQuad);
+            } else {
+                DOresetPos = body.DORotate(new Vector3(0f, 0f, 0f), 1.0f).SetEase(Ease.OutQuad);
+            }
 
-            DOresetPos = body.DORotate(new Vector3(0f, 0f, 0f), 1.0f).SetEase(Ease.OutQuad);
 
         }
         void PivotRotationZ(float degrees) {
@@ -200,7 +220,8 @@ namespace isj23.Movement {
             if (DOresetPos != null && DOresetPos.IsActive()) {
                 DOresetPos.Kill();
             }
-            body.DORotate(new Vector3(0f, 0f, degrees), 0.5f).SetEase(Ease.OutQuad);
+            positioning = true;
+            body.DORotate(new Vector3(0f, 0f, degrees), 0.3f).SetEase(Ease.OutQuad).OnComplete(() => positioning = false).OnKill(() => positioning = false);
 
         }
         public override void TryMove() {

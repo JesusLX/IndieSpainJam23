@@ -89,7 +89,6 @@ public class LightLifeController : MonoBehaviour, ITimeAffected {
     }
 
     public void AttachTimeEvents() {
-        Debug.Log("Atacjando");
         TimeManager.instance.OnPlayTimeStart.AddListener(OnPlayTimeStarts);
         TimeManager.instance.OnPlayTimeStop.AddListener(OnPlayTimeStops);
         TimeManager.instance.OnPlayTimeRestore.AddListener(OnPlayTimeRestore);

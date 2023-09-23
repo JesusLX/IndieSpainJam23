@@ -75,6 +75,7 @@ namespace isj23.Characters {
         public void Die(ICharacter assasing) {
             GameManager.instance.GameOver();
             GetComponentInChildren<Animator>().SetTrigger("onDie");
+            lighterDetector.enabled = false;
             OnDie?.Invoke();
         }
 
