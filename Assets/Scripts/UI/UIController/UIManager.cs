@@ -51,7 +51,7 @@ namespace isj23.Managers {
             //UIManager.instance.Hide(UIManager.instance.BattleScreenPanel);
             UIManager.instance.Hide(UIManager.instance.MainMenuPanel);
             UIManager.instance.Show(UIManager.instance.WinScreenPanel);
-            UIManager.instance.Show(UIManager.instance.GameOverPanel);
+            UIManager.instance.Hide(UIManager.instance.GameOverPanel);
         }
     } 
 }

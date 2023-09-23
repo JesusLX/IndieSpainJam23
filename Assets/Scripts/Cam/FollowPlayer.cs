@@ -6,6 +6,7 @@ public class FollowPlayer : MonoBehaviour {
     public float minY = 0f; // The minimum Y position for the camera
     public float centeringOffset = 0.2f; // Offset to center the camera slightly more
 
+
     void Update() {
         if (character != null) {
             // Get the character's position
