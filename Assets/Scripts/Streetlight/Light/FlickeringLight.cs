@@ -25,6 +25,8 @@ public class FlickeringLight : MonoBehaviour, ILight {
 
         if(light.enabled = (on_off)) {
             AnimatedTurnOn();
+        } else {
+            BlendColor(0);
         }
     }
     public bool IsOn() {
@@ -43,8 +45,27 @@ public class FlickeringLight : MonoBehaviour, ILight {
             .OnUpdate(() => {
                 // Opcional: Puedes realizar acciones adicionales durante el Tween
                 float valorActual = light.range;
+                BlendColor(valorActual);
             });
         AudioManager.Instance.Play("light_on", true, true);
+    }
+    public Renderer renderer; // The object's Renderer component
+    public Color initialColor; // Initial color in hexadecimal RGB format
+    public Color finalColor;   // Final color in hexadecimal RGB format
+
+    private void BlendColor(float elapsedTime) {
+
+        if (elapsedTime >= 0) {
+            // Interpolate between the initial and final color
+            float t = elapsedTime / startingIntesity;
+            Color currentColor = Color.Lerp(finalColor, initialColor, t);
+
+            // Update the material's emission field
+            renderer.material.SetColor("_EmissionColor", currentColor);
+        } else {
+            // When the transition is complete, set the final color
+            renderer.material.SetColor("_EmissionColor", finalColor);
+        }
     }
 
 }

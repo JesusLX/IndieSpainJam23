@@ -248,6 +248,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5529347931755286226, guid: 64f8cc8cafdc3214ca25946c433df06c, type: 3}
+      propertyPath: renderer
+      value: 
+      objectReference: {fileID: 1754575714336169173}
     - target: {fileID: 5529347931755286227, guid: 64f8cc8cafdc3214ca25946c433df06c, type: 3}
       propertyPath: m_Range
       value: 4.84
@@ -322,5 +326,10 @@ PrefabInstance:
 --- !u!4 &581718119841998778 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 97dc2509950cee34ca13e4ac4e84ebe7, type: 3}
+  m_PrefabInstance: {fileID: 1123671133324460113}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1754575714336169173 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 97dc2509950cee34ca13e4ac4e84ebe7, type: 3}
   m_PrefabInstance: {fileID: 1123671133324460113}
   m_PrefabAsset: {fileID: 0}

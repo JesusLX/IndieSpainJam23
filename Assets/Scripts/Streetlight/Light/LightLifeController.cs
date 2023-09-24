@@ -78,7 +78,6 @@ public class LightLifeController : MonoBehaviour, ITimeAffected {
     public Color initialColor; // Initial color in hexadecimal RGB format
     public Color finalColor;   // Final color in hexadecimal RGB format
 
-    private float elapsedTime = 0f;
     private void BlendColor(float elapsedTime) {
 
         if (elapsedTime >= 0) {
