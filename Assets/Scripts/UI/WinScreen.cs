@@ -10,6 +10,7 @@ namespace isj23.UIScreen {
         public Button nextButton;
         public Button mainMenuButton;
         public string nextScene;
+        public Curtain closeCurtain;
 
         private void Awake() {
             if(nextButton != null) {
@@ -19,10 +20,19 @@ namespace isj23.UIScreen {
         }
 
         public void GoNextScene() {
-            LevelManager.instance.LoadScene(nextScene);
+            
+            TimeManager.instance.StopPlayTime();
+            closeCurtain.onPartycleSystemStopped.AddListener(() => { LevelManager.instance.LoadScene(nextScene); });
+            UIManager.instance.FadeOut();
+            closeCurtain.Play();
+            Hide();
         }
         public void GoMainScene() {
-            LevelManager.instance.LoadScene("MainMenu");
+            TimeManager.instance.StopPlayTime();
+            closeCurtain.onPartycleSystemStopped.AddListener(() => { LevelManager.instance.LoadScene("MainMenu"); });
+            UIManager.instance.FadeOut();
+            closeCurtain.Play();
+            Hide();
         }
 
         public void Show() {

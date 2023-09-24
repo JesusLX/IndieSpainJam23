@@ -36,10 +36,11 @@ namespace isj23.Movement {
         public float jumpForceMax = 12;
         public float jumpForceGrouth = 6f;
         private bool isJumping = false;
+        private bool isFalling = false;
         private bool positioning = false;
 
-        public float velocidadRotacion = 100.0f; // Velocidad de rotaci�n, puedes ajustarla en el Inspector.
-        private float maxAnguloRotacion = 35.0f;
+        public float velocidadRotation = 100.0f; // Velocidad de rotaci�n, puedes ajustarla en el Inspector.
+        private float maxAnguloRotation = 35.0f;
         public Transform body;
         public Transform pivote;
 
@@ -76,7 +77,7 @@ namespace isj23.Movement {
                     animator.ResetTrigger("onFall");
                     animator.SetTrigger("onGround");
                     ResetRotationZ();
-
+                    isFalling = false;
                 }
                 isGrounded = groundDetector.IsTouching();
                 if (!isGrounded && leftWallDetector.IsTouching() && !isLeftTouching) {
@@ -132,7 +133,7 @@ namespace isj23.Movement {
             } else {
                 if (rb.velocity.y > 0 && isJumping) {
                     currentGravity = originalGravity * 1.5f;
-
+                    isFalling = true;
                 } else {
                     currentGravity = originalGravity;
                 }
@@ -171,7 +172,7 @@ namespace isj23.Movement {
             Vector3 direccionLanzamiento = new Vector3(direccion2D.y, direccion2D.x, 0.0f);
             // Aplicar una fuerza en la direcci�n calculada al Objeto a Lanzar
             rb.AddForce(direccionLanzamiento * jumpForce, ForceMode.Impulse);
-            PSManager.instance.Play("jump",null,transform.position,body.rotation);
+            PSManager.instance.Play("jump", null, transform.position, body.rotation);
             ResetJumpForce();
             ResetRotationZ(true);
             isJumping = true;
@@ -190,22 +191,23 @@ namespace isj23.Movement {
             float inputHorizontal = -input.GetMovementAxis();
 
             // Calcular el �ngulo de rotaci�n
-            float rotacion = inputHorizontal * velocidadRotacion * Time.deltaTime;
+            float rotation = inputHorizontal * velocidadRotation * Time.deltaTime;
 
             // Aplicar la rotaci�n al objeto
-            body.Rotate(Vector3.forward, rotacion);
+            body.Rotate(Vector3.forward, rotation);
 
             // Limitar la rotaci�n dentro de los l�mites
-            float rotacionActual = body.eulerAngles.z;
-            rotacionActual = (rotacionActual > 180) ? rotacionActual - 360 : rotacionActual;
-            float nuevaRotacion = Mathf.Clamp(rotacionActual, -maxAnguloRotacion, maxAnguloRotacion);
+            float rotationActual = body.eulerAngles.z;
+            rotationActual = (rotationActual > 180) ? rotationActual - 360 : rotationActual;
+            float nuevaRotation = Mathf.Clamp(rotationActual, -maxAnguloRotation, maxAnguloRotation);
 
             // Aplicar la rotaci�n limitada al objeto
-            body.rotation = Quaternion.Euler(0, 0, nuevaRotacion);
+            body.rotation = Quaternion.Euler(0, 0, nuevaRotation);
         }
         void ResetRotationZ(bool canAnimate = true) {
             float doOrNot = Random.Range(0f, 1f);
-            if (canAnimate && doOrNot > .9f && !isLeftTouching) {
+            Debug.Log(body.rotation.z);
+            if (canAnimate && doOrNot > 0f && (body.rotation.z > .9f && !isJumping)) {
                 var move = 360f;
                 DOresetPos = body.DORotate(new Vector3(0f, move, 0f), .5f, RotateMode.FastBeyond360).SetEase(Ease.OutQuad);
             } else {
@@ -239,6 +241,7 @@ namespace isj23.Movement {
                     rb.velocity = Vector3.zero;
                     Rotate();
                 }
+                transform.position = new Vector3(transform.position.x, transform.position.y, 0);
             }
         }
         #endregion 

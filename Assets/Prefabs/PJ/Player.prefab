@@ -1385,7 +1385,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 100
+      scalar: 10
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -1438,7 +1438,7 @@ ParticleSystem:
     rateOverDistance:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -5500,7 +5500,7 @@ MonoBehaviour:
   jumpForceStart: 6
   jumpForceMax: 13
   jumpForceGrouth: 8
-  velocidadRotacion: 60
+  velocidadRotation: 100
   body: {fileID: 4679081879385498346}
   pivote: {fileID: 4679081878743967255}
   originalGravity: -9.81

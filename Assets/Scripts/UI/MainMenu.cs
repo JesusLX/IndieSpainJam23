@@ -7,18 +7,18 @@ namespace isj23.UIScreen {
     public class MainMenu : MonoBehaviour, IUiScreen {
 
         public Button playButton;
-        public Curtain closeCurtain;
+        public Curtain openCurtain;
 
         private void Awake() {
             if (playButton != null) {
                 playButton.onClick.AddListener(Play);
             } else {
-                closeCurtain.onPartycleSystemStopped.AddListener(() => GameManager.instance.Play(true));
+                openCurtain.onPartycleSystemStopped.AddListener(() => GameManager.instance.Play(true));
             }
         }
 
         public void Play() {
-            closeCurtain.Play();
+            openCurtain.Play();
             GameManager.instance.Play(playButton != null);
         }
 
