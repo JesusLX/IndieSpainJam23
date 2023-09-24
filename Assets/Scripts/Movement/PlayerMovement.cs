@@ -207,7 +207,7 @@ namespace isj23.Movement {
         void ResetRotationZ(bool canAnimate = true) {
             float doOrNot = Random.Range(0f, 1f);
             Debug.Log(body.rotation.z);
-            if (canAnimate && doOrNot > 0f && (body.rotation.z > .9f && !isJumping)) {
+            if (canAnimate && doOrNot > .8f && (body.rotation.z >= 0f)) {
                 var move = 360f;
                 DOresetPos = body.DORotate(new Vector3(0f, move, 0f), .5f, RotateMode.FastBeyond360).SetEase(Ease.OutQuad);
             } else {
