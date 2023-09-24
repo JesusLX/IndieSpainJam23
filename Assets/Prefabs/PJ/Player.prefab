@@ -5462,7 +5462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c630af5ffbdebfb4daad1b425b09b777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  basicStats: {fileID: 11400000, guid: da4ecf6fa8918ba4cb2d8ba43328c22c, type: 2}
+  basicStats: {fileID: 11400000, guid: 025db742627c3d44c8d65b577a2359d9, type: 2}
   OnExperienceChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -5664,7 +5664,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 505443499704349846, guid: fbc0a1461c52e9a4fb8a7e5828a5bb1c, type: 3}
       propertyPath: addtionalSeconds
-      value: 10
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5529347931755286224, guid: fbc0a1461c52e9a4fb8a7e5828a5bb1c, type: 3}
       propertyPath: m_RootOrder

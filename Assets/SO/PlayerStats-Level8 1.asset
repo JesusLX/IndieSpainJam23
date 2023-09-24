@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e0131da309bd764d9bb65724bcc28eb, type: 3}
-  m_Name: PlayerStats-Level2
+  m_Name: PlayerStats-Level8 1
   m_EditorClassIdentifier: 
   Health:
-    maxHealth: 15
+    maxHealth: 40
     currentHealth: 10
   Movement:
     moveSpeed: 6
