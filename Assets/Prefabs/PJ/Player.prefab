@@ -5614,6 +5614,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9d0f900a2aa912a41aa77c32449b76a3, type: 3}
   m_PrefabInstance: {fileID: 4679081878711411777}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &6282210921115629765 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 9d0f900a2aa912a41aa77c32449b76a3, type: 3}
+  m_PrefabInstance: {fileID: 4679081878711411777}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4679081878821849725
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5625,6 +5630,38 @@ PrefabInstance:
       propertyPath: firePS
       value: 
       objectReference: {fileID: 4679081879801379796}
+    - target: {fileID: 505443499704349846, guid: fbc0a1461c52e9a4fb8a7e5828a5bb1c, type: 3}
+      propertyPath: renderer
+      value: 
+      objectReference: {fileID: 6282210921115629765}
+    - target: {fileID: 505443499704349846, guid: fbc0a1461c52e9a4fb8a7e5828a5bb1c, type: 3}
+      propertyPath: finalColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 505443499704349846, guid: fbc0a1461c52e9a4fb8a7e5828a5bb1c, type: 3}
+      propertyPath: finalColor.b
+      value: 0.4037469
+      objectReference: {fileID: 0}
+    - target: {fileID: 505443499704349846, guid: fbc0a1461c52e9a4fb8a7e5828a5bb1c, type: 3}
+      propertyPath: finalColor.g
+      value: 0.4053365
+      objectReference: {fileID: 0}
+    - target: {fileID: 505443499704349846, guid: fbc0a1461c52e9a4fb8a7e5828a5bb1c, type: 3}
+      propertyPath: finalColor.r
+      value: 0.4056604
+      objectReference: {fileID: 0}
+    - target: {fileID: 505443499704349846, guid: fbc0a1461c52e9a4fb8a7e5828a5bb1c, type: 3}
+      propertyPath: initialColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 505443499704349846, guid: fbc0a1461c52e9a4fb8a7e5828a5bb1c, type: 3}
+      propertyPath: initialColor.g
+      value: 0.61928934
+      objectReference: {fileID: 0}
+    - target: {fileID: 505443499704349846, guid: fbc0a1461c52e9a4fb8a7e5828a5bb1c, type: 3}
+      propertyPath: initialColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 505443499704349846, guid: fbc0a1461c52e9a4fb8a7e5828a5bb1c, type: 3}
       propertyPath: addtionalSeconds
       value: 10

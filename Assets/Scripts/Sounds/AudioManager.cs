@@ -109,6 +109,6 @@ public class AudioManager : MonoBehaviour {
     }
 
     public void ResetAllVolumes() {
-        sounds.ForEach(s => s.source.volume = s.volume);
+        sounds.ForEach(s => s.source.volume = s.maxVolume);
     }
 }

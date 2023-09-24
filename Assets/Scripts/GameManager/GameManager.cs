@@ -13,8 +13,14 @@ namespace isj23.Managers {
         public UnityEvent OnWinOver = new();
         private void Start() {
             MainMenu();
+            Musica();
         }
-
+        [ContextMenu("Musica")]
+        public void Musica() {
+            if (!AudioManager.Instance.IsPlaying("background")) {
+                AudioManager.Instance.Play("background");
+            }
+        }
         /// <summary>
         /// Prepare the Canvas for the MainMenu and stops the game
         /// </summary>
@@ -26,7 +32,6 @@ namespace isj23.Managers {
         /// <summary>
         /// Prepare the Canvas and start the game
         /// </summary>
-        [ContextMenu("Play")]
         public void Play(bool startTime = false) {
             UIManager.instance.PlayMenu();
             if (startTime) {

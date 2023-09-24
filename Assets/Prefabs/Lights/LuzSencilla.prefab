@@ -126,3 +126,11 @@ MonoBehaviour:
   startingSeconds: 100
   remainingSeconds: 0
   addtionalSeconds: 2
+  timeRunning: 0
+  onLightOff:
+    m_PersistentCalls:
+      m_Calls: []
+  firePS: {fileID: 0}
+  renderer: {fileID: 0}
+  initialColor: {r: 1, g: 0.72450346, b: 0, a: 1}
+  finalColor: {r: 0, g: 0, b: 0, a: 0}

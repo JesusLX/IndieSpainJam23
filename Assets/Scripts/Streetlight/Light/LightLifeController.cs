@@ -51,7 +51,7 @@ public class LightLifeController : MonoBehaviour, ITimeAffected {
             float lightPercentage = 1 - timeElapsed / startingSeconds;
 
             light.intensity = startingIntesity * lightPercentage;
-
+            BlendColor(remainingSeconds);
             if (remainingSeconds <= 0) {
                 onLightOff?.Invoke();
                 firePS.Stop();
@@ -72,6 +72,25 @@ public class LightLifeController : MonoBehaviour, ITimeAffected {
             remainingSeconds -= time;
         if(remainingSeconds <= 0) {
             remainingSeconds = 0.1f;
+        }
+    }
+    public Renderer renderer; // The object's Renderer component
+    public Color initialColor; // Initial color in hexadecimal RGB format
+    public Color finalColor;   // Final color in hexadecimal RGB format
+
+    private float elapsedTime = 0f;
+    private void BlendColor(float elapsedTime) {
+
+        if (elapsedTime >= 0) {
+            // Interpolate between the initial and final color
+            float t = elapsedTime / startingSeconds;
+            Color currentColor = Color.Lerp(finalColor, initialColor, t);
+
+            // Update the material's emission field
+            renderer.material.SetColor("_EmissionColor", currentColor);
+        } else {
+            // When the transition is complete, set the final color
+            renderer.material.SetColor("_EmissionColor", finalColor);
         }
     }
 
