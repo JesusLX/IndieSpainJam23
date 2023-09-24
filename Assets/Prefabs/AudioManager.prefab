@@ -53,19 +53,19 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: jump
     clip: {fileID: 8300000, guid: 2a23f008cce14c843a92baf3847f7977, type: 3}
-    volume: 1
+    volume: 0.1
     pitch: 0
     loop: 0
     source: {fileID: 0}
   - name: light_on
     clip: {fileID: 8300000, guid: bbf53eac0c0ed0f40a41afdd1b68afed, type: 3}
-    volume: 1
+    volume: 0.1
     pitch: 0
     loop: 0
     source: {fileID: 0}
   - name: light_on_2
     clip: {fileID: 8300000, guid: 2566f3ccd51e1cf48b44af65020e5237, type: 3}
-    volume: 1
+    volume: 0.1
     pitch: 0
     loop: 0
     source: {fileID: 0}

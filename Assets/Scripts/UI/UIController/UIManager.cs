@@ -1,17 +1,19 @@
 using isj23.UIScreen;
+using System;
+using UnityEngine;
 
 namespace isj23.Managers {
     public class UIManager : Singleton<UIManager> {
-        public MainMenu MainMenuPanel;
-        public GameOverScreen GameOverPanel;
-        public BattleScreen BattleScreenPanel;
-        public WinScreen WinScreenPanel;
-
+        public MainMenu MainMenuPanel = null;
+        public GameOverScreen GameOverPanel = null;
+        public BattleScreen BattleScreenPanel = null;
+        public WinScreen WinScreenPanel = null;
+        public GameObject FadeOutPanel = null;
         public void Show(IUiScreen screen) {
-            screen.Show();
+            screen?.Show();
         }
         public void Hide(IUiScreen screen) {
-            screen.Hide();
+            screen?.Hide();
         }
 
         public void MainMenu() {
@@ -52,6 +54,10 @@ namespace isj23.Managers {
             UIManager.instance.Hide(UIManager.instance.MainMenuPanel);
             UIManager.instance.Show(UIManager.instance.WinScreenPanel);
             UIManager.instance.Hide(UIManager.instance.GameOverPanel);
+        }
+
+        public void FadeOut() {
+            FadeOutPanel.SetActive(true);
         }
     } 
 }
