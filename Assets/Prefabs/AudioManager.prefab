@@ -47,29 +47,29 @@ MonoBehaviour:
   sounds:
   - name: background
     clip: {fileID: 8300000, guid: b6586f488c0b34a4eb7eba3d827fc151, type: 3}
-    volume: 1
-    maxVolume: 1
-    pitch: 0
+    volume: 0.38
+    maxVolume: 0.38
+    pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: jump
     clip: {fileID: 8300000, guid: 2a23f008cce14c843a92baf3847f7977, type: 3}
-    volume: 0.1
-    maxVolume: 0.1
-    pitch: 0
+    volume: 0.3
+    maxVolume: 0.3
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: light_on
     clip: {fileID: 8300000, guid: bbf53eac0c0ed0f40a41afdd1b68afed, type: 3}
     volume: 0.1
     maxVolume: 0.1
-    pitch: 0
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: light_on_2
     clip: {fileID: 8300000, guid: 2566f3ccd51e1cf48b44af65020e5237, type: 3}
     volume: 0.1
     maxVolume: 0.1
-    pitch: 0
+    pitch: 1
     loop: 0
     source: {fileID: 0}

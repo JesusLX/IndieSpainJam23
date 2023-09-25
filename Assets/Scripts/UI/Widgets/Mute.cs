@@ -22,23 +22,17 @@ public class Mute : MonoBehaviour, IWidget {
         muteButton.onClick.RemoveAllListeners();
         muteButton.onClick.AddListener(Click);
         if (AudioManager.Instance.GetVolume("background") == 0) {
-            muted.enabled = false;
-            sound.enabled = true;
-        } else {
             muted.enabled = true;
             sound.enabled = false;
+        } else {
+            muted.enabled = false;
+            sound.enabled = true;
         }
     }
 
     public void Show() {
         this.enabled = true;
-        if (AudioManager.Instance.GetVolume("background") == 0) {
-            muted.enabled = false;
-            sound.enabled = true;
-        } else {
-            muted.enabled = true;
-            sound.enabled = false;
-        }
+       
     }
     public void Click() {
         if (AudioManager.Instance.GetVolume("background") == 0) {
