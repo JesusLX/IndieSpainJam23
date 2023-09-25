@@ -18,4 +18,15 @@ public class LevelManager : Singleton<LevelManager> {
         // Salir del juego (solo funciona en la compilación)
         Application.Quit();
     }
+    void Update() {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            string currentSceneName = SceneManager.GetActiveScene().name;
+
+            if (currentSceneName == "MainMenu") {
+                QuitGame();
+            } else {
+                LoadScene("MainMenu");
+            }
+        }
+    }
 }

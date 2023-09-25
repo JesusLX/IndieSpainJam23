@@ -5855,7 +5855,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5030724123825448289, guid: e42b4c8871d949842bb8f9cff817e5e2, type: 3}
       propertyPath: nextScene
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5030724123825448289, guid: e42b4c8871d949842bb8f9cff817e5e2, type: 3}
       propertyPath: closeCurtain
