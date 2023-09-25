@@ -111,7 +111,7 @@ PrefabInstance:
     - target: {fileID: 5419215915201430224, guid: 32345763f62d0df4c9e6e3770ac54dc5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6deb8817cb394eb41969558f38b9c3cc, type: 2}
+      objectReference: {fileID: 2100000, guid: 1908399df257b7a42867d1ca7d7aae83, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32345763f62d0df4c9e6e3770ac54dc5, type: 3}
 --- !u!4 &5018788214448701596 stripped
@@ -189,7 +189,7 @@ PrefabInstance:
     - target: {fileID: 5419215915201430224, guid: 32345763f62d0df4c9e6e3770ac54dc5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6deb8817cb394eb41969558f38b9c3cc, type: 2}
+      objectReference: {fileID: 2100000, guid: 1908399df257b7a42867d1ca7d7aae83, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32345763f62d0df4c9e6e3770ac54dc5, type: 3}
 --- !u!4 &5018788214279926155 stripped
@@ -264,6 +264,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Telon (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 5419215915201430224, guid: 32345763f62d0df4c9e6e3770ac54dc5, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 004c96d5d66e15247b754694820be862, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32345763f62d0df4c9e6e3770ac54dc5, type: 3}
 --- !u!4 &5018788214323191023 stripped
@@ -341,7 +345,7 @@ PrefabInstance:
     - target: {fileID: 5419215915201430224, guid: 32345763f62d0df4c9e6e3770ac54dc5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6deb8817cb394eb41969558f38b9c3cc, type: 2}
+      objectReference: {fileID: 2100000, guid: 1908399df257b7a42867d1ca7d7aae83, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32345763f62d0df4c9e6e3770ac54dc5, type: 3}
 --- !u!4 &5018788214342647223 stripped
@@ -419,7 +423,7 @@ PrefabInstance:
     - target: {fileID: 5419215915201430224, guid: 32345763f62d0df4c9e6e3770ac54dc5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6deb8817cb394eb41969558f38b9c3cc, type: 2}
+      objectReference: {fileID: 2100000, guid: 1908399df257b7a42867d1ca7d7aae83, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32345763f62d0df4c9e6e3770ac54dc5, type: 3}
 --- !u!4 &5018788214658786831 stripped
@@ -494,6 +498,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Telon (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 5419215915201430224, guid: 32345763f62d0df4c9e6e3770ac54dc5, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 004c96d5d66e15247b754694820be862, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32345763f62d0df4c9e6e3770ac54dc5, type: 3}
 --- !u!4 &5018788214677046299 stripped
@@ -571,7 +579,7 @@ PrefabInstance:
     - target: {fileID: 5419215915201430224, guid: 32345763f62d0df4c9e6e3770ac54dc5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6deb8817cb394eb41969558f38b9c3cc, type: 2}
+      objectReference: {fileID: 2100000, guid: 1908399df257b7a42867d1ca7d7aae83, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32345763f62d0df4c9e6e3770ac54dc5, type: 3}
 --- !u!4 &5018788213494936586 stripped
@@ -649,7 +657,7 @@ PrefabInstance:
     - target: {fileID: 5419215915201430224, guid: 32345763f62d0df4c9e6e3770ac54dc5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6deb8817cb394eb41969558f38b9c3cc, type: 2}
+      objectReference: {fileID: 2100000, guid: 1908399df257b7a42867d1ca7d7aae83, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32345763f62d0df4c9e6e3770ac54dc5, type: 3}
 --- !u!4 &5018788214061586387 stripped
@@ -727,7 +735,7 @@ PrefabInstance:
     - target: {fileID: 5419215915201430224, guid: 32345763f62d0df4c9e6e3770ac54dc5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6deb8817cb394eb41969558f38b9c3cc, type: 2}
+      objectReference: {fileID: 2100000, guid: 1908399df257b7a42867d1ca7d7aae83, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32345763f62d0df4c9e6e3770ac54dc5, type: 3}
 --- !u!4 &5018788213584788139 stripped
@@ -805,7 +813,7 @@ PrefabInstance:
     - target: {fileID: 5419215915201430224, guid: 32345763f62d0df4c9e6e3770ac54dc5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6deb8817cb394eb41969558f38b9c3cc, type: 2}
+      objectReference: {fileID: 2100000, guid: 1908399df257b7a42867d1ca7d7aae83, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32345763f62d0df4c9e6e3770ac54dc5, type: 3}
 --- !u!4 &5018788213649282147 stripped
